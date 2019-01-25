@@ -3,6 +3,7 @@ package com.hwang.healthtrackerbackend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -21,12 +22,17 @@ public class ExerciseController {
     }
 
     @PostMapping("/exercises")
-    public void addExercise(Exercise e){
-        if(e.getTimestamp() == null){
+    public Exercise addExercise(@RequestParam String title,
+                            @RequestParam String sets,
+                            @RequestParam String reps,
+                            @RequestParam String descrption,
+                            @RequestParam String timestamp){
+        if(timestamp == null){
             Date currentTime = Calendar.getInstance().getTime();
-            e.setTimestamp(currentTime.toString());
+            timestamp = currentTime.toString();
         }
-        exerciseRepo.save(e);
+        Exercise newExerciseObject = new Exercise(title,  Integer.parseInt(sets), Integer.parseInt(reps), descrption, timestamp);
+        return exerciseRepo.save(newExerciseObject);
     }
 
 }
