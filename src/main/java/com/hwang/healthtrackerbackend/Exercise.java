@@ -12,6 +12,11 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     public int id;
+    public String title;
+    public int sets;
+    public int reps;
+    public String description;
+    public String timestamp;
 
     public String getTitle() {
         return title;
@@ -53,11 +58,7 @@ public class Exercise {
         this.timestamp = timestamp;
     }
 
-    public String title;
-    public int sets;
-    public int reps;
-    public String description;
-    public String timestamp;
+
 
     public Exercise(String title, int sets, int reps, String description, String timestamp){
         this.title = title;
@@ -67,7 +68,7 @@ public class Exercise {
         this.timestamp = timestamp;
     }
 
-    public Exercise(){}
+//    public Exercise(){}
 
     public String toString(){
         return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp;

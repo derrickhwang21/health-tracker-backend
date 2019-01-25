@@ -17,6 +17,11 @@ public class ExerciseController {
     @Autowired
     private ExerciseRepository exerciseRepo;
 
+    @GetMapping("/")
+    public String home() {
+        return "index";
+    }
+
     @GetMapping("/exercises")
     public Iterable<Exercise> getExercise(){
         return exerciseRepo.findAll();
@@ -26,17 +31,17 @@ public class ExerciseController {
     public Exercise addExercise(@RequestParam String title,
                             @RequestParam String sets,
                             @RequestParam String reps,
-                            @RequestParam String descrption,
+                            @RequestParam String description,
                             @RequestParam String timestamp){
         if(timestamp == null){
             Date currentTime = Calendar.getInstance().getTime();
             timestamp = currentTime.toString();
         }
-        Exercise newExerciseObject = new Exercise(title,  Integer.parseInt(sets), Integer.parseInt(reps), descrption, timestamp);
+        Exercise newExerciseObject = new Exercise(title,  Integer.parseInt(sets), Integer.parseInt(reps), description, timestamp);
         return exerciseRepo.save(newExerciseObject);
     }
 
-    @PostMapping(value = "/exercises/reset")
+    @GetMapping(value = "/exercises/reset")
     public RedirectView resetParkingLot() {
         Date currentTime = Calendar.getInstance().getTime();
         exerciseRepo.save(new Exercise("Server-Burpees", 1, 10, "All Day!", currentTime.toString()));
