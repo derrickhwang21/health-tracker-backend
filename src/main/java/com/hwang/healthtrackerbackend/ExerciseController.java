@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 import java.util.Calendar;
@@ -33,6 +34,14 @@ public class ExerciseController {
         }
         Exercise newExerciseObject = new Exercise(title,  Integer.parseInt(sets), Integer.parseInt(reps), descrption, timestamp);
         return exerciseRepo.save(newExerciseObject);
+    }
+
+    @PostMapping(value = "/exercises/reset")
+    public RedirectView resetParkingLot() {
+        Date currentTime = Calendar.getInstance().getTime();
+        exerciseRepo.save(new Exercise("Server-Burpees", 1, 10, "All Day!", currentTime.toString()));
+
+        return new RedirectView("/exercises");
     }
 
 }
