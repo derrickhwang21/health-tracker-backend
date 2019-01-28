@@ -17,6 +17,8 @@ public class Exercise {
     public int reps;
     public String description;
     public String timestamp;
+    public double longitude;
+    public double latitude;
 
     public String getTitle() {
         return title;
@@ -60,17 +62,19 @@ public class Exercise {
 
 
 
-    public Exercise(String title, int sets, int reps, String description, String timestamp){
+    public Exercise(String title, int sets, int reps, String description, String timestamp, double longitude, double latitude){
         this.title = title;
         this.sets = sets;
         this.reps = reps;
         this.description = description;
         this.timestamp = timestamp;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public Exercise(){}
 
     public String toString(){
-        return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp;
+        return "Exercise name: " + title + " Sets: " + sets + " Reps: " + reps + " Description: " + description + " Time: " + timestamp + "Longitude: " + longitude + "Latitude: " + latitude;
     }
 }
